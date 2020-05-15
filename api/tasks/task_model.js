@@ -6,9 +6,9 @@ module.exports = {
 };
 
 function find() {
-  return db("task");
+  return db("tasks");
 }
 
 function add(task) {
-  return db("task").insert(task);
+  return db("tasks").insert(task);
 }

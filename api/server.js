@@ -44,7 +44,15 @@ server.post("/api/projects", (req, res) => {
 });
 
 server.get("/api/resources", (req, res) => {
-  // TODO route for list of resources
+  Resources.find()
+    .then(resources => {
+      console.log(resources)
+      res.status(201).json({ data: resources })
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(500).json({ errorMessage: error.message })
+    })
 });
 
 server.post("/api/resources", (req, res) => {
@@ -52,7 +60,15 @@ server.post("/api/resources", (req, res) => {
 });
 
 server.get("/api/tasks", (req, res) => {
-  // TODO route for list of tasks
+  Tasks.find()
+  .then(tasks => {
+    console.log(tasks)
+    res.status(201).json({ data: tasks })
+  })
+  .catch(error => {
+    console.log(error)
+    res.status(500).json({ errorMessage: error.message })
+  })
 });
 
 server.post("/api/tasks", (req, res) => {
