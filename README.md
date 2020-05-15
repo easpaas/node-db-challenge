@@ -40,11 +40,19 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 - [ ] Explain the difference between `Relational Databases` and `SQL`.
 
+  Relational Databases use SQL to perform CRUD operations. SQL Databases are Relational Databases that differ from NoSQL Databases. i.e. Non-Relational Databases.
+
 - [ ] Why do tables need a `primary key`?
+
+  Primary keys are used to locate the correct tables within a database. 
 
 - [ ] What is the name given to a table column that references the primary key on another table.
 
+  Foreign key is the table column that references the primary key on another table.
+
 - [ ] What do we need in order to have a _many to many_ relationship between two tables.
+
+  To have a many to many relationship, there will need to be a third table that has two foreign keys, linking to the corresponding primary key tables.
 
 ## Minimum Viable Product
 
