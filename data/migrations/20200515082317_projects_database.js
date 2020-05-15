@@ -1,4 +1,3 @@
-
 exports.up = function(knex) {
   return knex.schema
     .createTable("project", projects_table => {
@@ -16,10 +15,11 @@ exports.up = function(knex) {
       tasks_table.boolean("completed", false).notNullable();
 
       // Create a foreign key linked to project table id
-      tasks_table.integer("project")
+      tasks_table.integer("project_id")
       .unsigned()
       .notNullable()
-      .references("project.id")
+      .references("id")
+      .inTable("project")
       .onUpdate("CASCADE")
       .onDelete("RESTRICT");
     })
@@ -29,35 +29,42 @@ exports.up = function(knex) {
       resources_table.string("name", 255).notNullable();
       resources_table.string("description", 255);
       
-      // Create a foreign key linked to project table id
-      resources_table.integer("project")
-      .unsigned()
-      .notNullable()
-      .references("project.id")
-      .onUpdate("CASCADE")
-      .onDelete("RESTRICT");
+      // // Create a foreign key linked to project table id
+      // resources_table.integer("project_id")
+      // .unsigned()
+      // .notNullable()
+      // .references("id")
+      // .inTable("project")
+      // .onUpdate("CASCADE")
+      // .onDelete("RESTRICT");
     })
     .createTable("project_resources", pr_table => {
       pr_table.increments();
 
       // Create a foreign key linked to project table
-      pr_table.integer("project")
+      pr_table.integer("project_id")
       .unsigned()
       .notNullable()
-      .references("project.id")
+      .references("id")
+      .inTable("project")
       .onUpdate("CASCADE")
       .onDelete("RESTRICT");
 
       // Create a foreign key linked to resource table
-      pr_table.integer("resource")
+      pr_table.integer("resource_id")
       .unsigned()
       .notNullable()
-      .references("resource.id")
+      .references("id")
+      .inTable("resource")
       .onUpdate("CASCADE")
       .onDelete("RESTRICT");
     })
 };
 
 exports.down = function(knex) {
-  
+  return knex.schema
+    .dropTableIfExists("project_resources")
+    .dropTableIfExists("resource")
+    .dropTableIfExists("tasks")
+    .dropTableIfExists("project");
 };
