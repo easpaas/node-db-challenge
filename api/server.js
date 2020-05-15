@@ -30,7 +30,17 @@ server.get("/api/projects", (req, res) => {
 });
 
 server.post("/api/projects", (req, res) => {
-  // TODO route for adding a project
+  const project = req.body;
+
+  Projects.add(project)
+    .then(id => {
+      console.log(id);
+      res.status(201).json({ data: `Success! Project assigned id of ${id}.` })
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(500).json({ errorMessage: error.message })
+    })
 });
 
 server.get("/api/resources", (req, res) => {
