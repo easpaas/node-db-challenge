@@ -56,7 +56,17 @@ server.get("/api/resources", (req, res) => {
 });
 
 server.post("/api/resources", (req, res) => {
-  // TODO route for adding a resource
+  const resource = req.body;
+
+  Resources.add(resource)
+    .then(id => {
+      console.log(id);
+      res.status(201).json({ data: `Success! resource assigned id of ${id}.` })
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(500).json({ errorMessage: error.message })
+    })
 });
 
 server.get("/api/tasks", (req, res) => {
@@ -72,7 +82,17 @@ server.get("/api/tasks", (req, res) => {
 });
 
 server.post("/api/tasks", (req, res) => {
-  // TODO route for adding a task
+  const task = req.body;
+
+  Tasks.add(task)
+    .then(id => {
+      console.log(id);
+      res.status(201).json({ data: `Success! task assigned id of ${id}.` })
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(500).json({ errorMessage: error.message })
+    })
 });
 
 module.exports = server;
