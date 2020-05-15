@@ -70,6 +70,9 @@ server.post("/api/resources", (req, res) => {
 });
 
 server.get("/api/tasks", (req, res) => {
+
+  // list of tasks should include project name and description 
+
   Tasks.find()
   .then(tasks => {
     console.log(tasks)

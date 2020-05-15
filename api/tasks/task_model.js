@@ -6,7 +6,18 @@ module.exports = {
 };
 
 function find() {
-  return db("tasks");
+  // list of tasks should include project name and description
+  /* 
+    select t.id, t.description, t.notes, t.completed, p.name as ProjectName,      p.description as projectDescription from tasks as t
+      join project as p
+        on t.project_id = p.id; 
+  */
+
+//  .join("users as u", "p.user_id", "=", "u.id")
+
+  return db("tasks as t")
+    .join("project as p", "t.project_id", "=", "p.id")
+    .select("t.*", "p.name as Project Name", "p.description as Project Description");
 }
 
 function add(task) {
