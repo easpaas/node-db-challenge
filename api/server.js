@@ -18,7 +18,15 @@ server.use(express.json());
 // })
 
 server.get("/api/projects", (req, res) => {
-  // TODO route for list of projects
+  Projects.find()
+    .then(projects => {
+      console.log(projects)
+      res.status(201).json({ data: projects })
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(500).json({ errorMessage: error.message })
+    })
 });
 
 server.post("/api/projects", (req, res) => {
